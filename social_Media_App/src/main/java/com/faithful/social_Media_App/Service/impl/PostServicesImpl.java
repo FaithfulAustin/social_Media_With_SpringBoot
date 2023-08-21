@@ -12,6 +12,7 @@ import com.faithful.social_Media_App.repo.PostRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -40,21 +41,41 @@ public class PostServicesImpl implements PostServices {
         Post postRespons = postRepo.save(post);
 //
         return mapToDTO(postRespons) ;
-//        return null;
+
     }
 
     @Override
     public PostDto addTagsToPost(long postId, Tag tag) {
-        //
-//        Post post = postRepo.findById(postId).get();
+
+
+
+        //Getting the post from the database
+        Post post = postRepo.findById(postId).get();
+        Set<Tag> tags = new HashSet<>();
+        //getting all the Tags For the post
+        tags.addAll(post.getTags());
+        //Checking if tag exists Already
+        Tag tagsInDb = tagRepo.findById(tag.getId()).get();
+
+        long tagId = tagsInDb.getId();
+
+
+        if(tag.getId().equals(tagId)){
+
+            tags.add(tagsInDb);
+
+        }else{
+
+            tags.add(tag);
+        }
+
+
+        post.setTags(tags);
+
+
+        Post postRespons = postRepo.save(post);
 //
-//        List<Tag> tagToAdd = tagRepo.findAllById(tagIds);
-//
-//        post.getTags().addAll(tagToAdd);
-//        Post postRespons = postRepo.save(post);
-        //
-//        return mapToDTO(postRespons);
-        return null;
+        return mapToDTO(postRespons) ;
     }
 
 
