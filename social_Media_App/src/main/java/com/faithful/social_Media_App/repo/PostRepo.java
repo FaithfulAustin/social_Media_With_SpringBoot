@@ -10,6 +10,6 @@ import java.util.List;
 public interface PostRepo extends JpaRepository<Post, Long> {
 
     List<Post> findByUserId(long userId);
-//    List<Post> findPostByTagsIn(long tagId);
+    List<Post> findByTagsId(long tagId);
 
 }

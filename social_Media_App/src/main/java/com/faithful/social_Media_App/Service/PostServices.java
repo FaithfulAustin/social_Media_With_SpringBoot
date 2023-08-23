@@ -9,6 +9,7 @@ public interface PostServices {
 
     PostDto createPost(long user_Id, PostDto postDto);
     PostDto addTagsToPost(long postId, Tag tag);
-
+    List<PostDto> getPostByUserID(long userId);
+    List<PostDto> getPostBytagId(long tagId);
 
 }

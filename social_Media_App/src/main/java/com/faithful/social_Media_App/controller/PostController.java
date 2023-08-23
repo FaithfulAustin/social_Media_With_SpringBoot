@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -46,6 +47,20 @@ public class PostController {
         return  new ResponseEntity<>(post_New,HttpStatus.CREATED);
 
     };
+
+    @GetMapping("/{userId}/post")
+    public ResponseEntity<List<PostDto>> getPostByUser(@PathVariable(value = "userId") long userId){
+
+        List<PostDto>   postByUserId =postServices.getPostByUserID(userId);
+        return new ResponseEntity<>(postByUserId,HttpStatus.OK);
+    }
+
+    @GetMapping("/{tagId}/tags")
+    public ResponseEntity<List<PostDto>> getPostBytagId(@PathVariable(value = "tagId") long tagId){
+        List<PostDto>   postByTagId =postServices.getPostBytagId(tagId);
+        return new ResponseEntity<>(postByTagId,HttpStatus.OK);
+
+    }
 
 
 
