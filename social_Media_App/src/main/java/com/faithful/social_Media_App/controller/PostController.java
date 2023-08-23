@@ -55,7 +55,7 @@ public class PostController {
         return new ResponseEntity<>(postByUserId,HttpStatus.OK);
     }
 
-    @GetMapping("/{tagId}/tags")
+    @GetMapping("/{tagId}/postByTagId")
     public ResponseEntity<List<PostDto>> getPostBytagId(@PathVariable(value = "tagId") long tagId){
         List<PostDto>   postByTagId =postServices.getPostBytagId(tagId);
         return new ResponseEntity<>(postByTagId,HttpStatus.OK);
